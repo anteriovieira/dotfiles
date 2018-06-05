@@ -27,7 +27,7 @@ mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
-    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    # rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
 
     # Force remove the vim directory if it's already there.
     if [ -e "${HOME}/.vim" ]; then
@@ -37,17 +37,14 @@ mirrorfiles() {
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
-    link "shell/bashrc"       ".bashrc"
-    link "shell/bash_profile" ".bash_profile"
+    link "shell/bashrc_aliases"       ".bashrc_aliases"
 
     alert "Dotfiles update complete!"
 }
 
-
-if is_confirmed; then
-    mirrorfiles
-    source ${HOME}/.bash_profile
-else
-    printf "Aborting...\n"
-    exit 1
-fi
+read -p "Warning: This step may overwrite your existing dotfiles, continue (y/n)?" choice
+case "$choice" in 
+  y|Y ) mirrorfiles && source ${HOME}/.bash_profile;;
+  n|N ) printf "Aborting...\n" && exit 1;;
+  * ) echo "invalid";;
+esac
