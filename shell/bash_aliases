@@ -11,6 +11,9 @@ alias ...="cd ../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
+# open current dir
+alias do="xdg-open"
+
 # List dir contents aliases
 # ref: http://ss64.com/osx/ls.html
 # Long form no user group, color
