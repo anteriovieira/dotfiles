@@ -37,14 +37,15 @@ mirrorfiles() {
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
-    link "shell/bashrc_aliases"       ".bashrc_aliases"
+    link "shell/bash_profile"    ".bash_profile"
+    link "shell/bashrc_aliases"  ".bashrc_aliases"
 
-    alert "Dotfiles update complete!"
+    echo "Dotfiles update complete!"
 }
 
 read -p "Warning: This step may overwrite your existing dotfiles, continue (y/n)?" choice
 case "$choice" in 
-  y|Y ) mirrorfiles && source ${HOME}/.bash_profile;;
+  y|Y ) mirrorfiles && source ${HOME}/.bashrc && source ${HOME}/.bash_profile;;
   n|N ) printf "Aborting...\n" && exit 1;;
   * ) echo "invalid";;
 esac
