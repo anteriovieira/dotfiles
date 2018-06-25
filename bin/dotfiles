@@ -38,7 +38,7 @@ mirrorfiles() {
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
     link "shell/bash_profile"    ".bash_profile"
-    link "shell/bashrc_aliases"  ".bashrc_aliases"
+    link "shell/bash_aliases"  ".bash_aliases"
 
     echo "Dotfiles update complete!"
 }
